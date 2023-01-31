@@ -1,0 +1,19 @@
+{% load menu %}
+
+{% if menu_item.has_children %}
+    <li class="section">
+        {% if menu_item.item.pk in opened_items %}
+            <input type="checkbox" id="{{ menu_item.item.pk }}" checked/>
+        {% else %}
+            <input type="checkbox" id="{{ menu_item.item.pk }}"/>
+        {% endif %}
+        <label for="{{ menu_item.item.pk }}"><a href="{{ menu_item.item.get_url }}">{{ menu_item.item.label }}</a></label>
+        <ul>
+            {% for child in menu_item.children %}
+                {% draw_menu_item child %}
+            {% endfor %}
+        </ul>
+    </li>
+{% else %}
+    <li id="{{ menu_item.item.pk }}"><a href="{{ menu_item.item.get_url }}">{{ menu_item.item.label }}</a></li>
+{% endif %}

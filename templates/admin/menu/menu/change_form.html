@@ -1,0 +1,57 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block after_related_objects %}
+{% if change %}
+  <fieldset class="module aligned">
+	  <div class="form-row field-name" >
+		<a href="../items/add/">{% trans "Add new item" %}</a>
+	  </div>
+
+	  <h2> {% trans "Menu Items" %} </h2>
+
+	  <style type="text/css">
+		  .items-box tbody tr:hover{
+			  background-color: #00363A;
+		  }
+	  </style>
+
+		<div class="items-box">
+		  <table cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th>{% trans "Label" %}</th>
+					<th>{% trans "URL" %}</th>
+					<th>{% trans "Named URL" %}</th>
+					<th>{% trans "Action" %}</th>
+				</tr>
+			</thead>
+
+			<tbody>
+			  {% for menu_item in menu_items %}
+				<tr>
+
+					<td width="35%">
+						<a style="white-space: pre-wrap;" href="../items/{{ menu_item.pk }}">{{ menu_item.label_with_spaces }}</a>
+
+					</td>
+					<td width="35%">
+							{{ menu_item.url }}
+					</td>
+					<td width="25%">
+							{{ menu_item.named_url }}
+					</td>
+					<td width="5%">
+						<a class="deletelink" href="../items/{{ menu_item.pk }}/delete">{% trans "Delete" %}</a>
+					</td>
+
+				</tr>
+			  {% endfor %}
+			</tbody>
+		  </table>
+
+		</div>
+
+  </fieldset>
+{% endif %}
+{% endblock %}

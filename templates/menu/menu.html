@@ -1,0 +1,50 @@
+{% load menu %}
+
+<ul class="tree">
+    {% for item in menu.head.children %}
+        {% draw_menu_item item %}
+    {% endfor %}
+</ul>
+
+
+<style type="text/css">
+    .tree, .section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .tree {
+      background: #f7f7f7;
+      border: 1px solid #aaa;
+    }
+    .tree li {
+      border-bottom: 1px solid #aaa;
+      padding: 15px 0px 15px 15px;
+    }
+    .tree li:last-child {
+      border: 0;
+    }
+
+    .section ul { display: none; }
+    .section input:checked ~ ul { display: block; }
+
+    .section input[type=checkbox] { display: none; }
+
+    .section {
+      position: relative;
+    }
+    .section label:after {
+      content: "\0002B";
+      position: absolute;
+      top: 0; right: 0;
+      padding: 7px 10px;
+      text-align: center;
+      font-size: 30px;
+      color: #0b0;
+      transition: all 0.5s;
+    }
+    .section input:checked ~ label:after {
+      color: #f00;
+      transform: rotate(45deg);
+    }
+</style>
